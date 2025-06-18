@@ -1,0 +1,480 @@
+<style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        background-color: #f5f5f5; /* Facultatif */
+    }
+
+
+    .background {
+        background: url('../images/1010399.avif');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+    }
+
+    .full-width-header {
+        color: #ffffff;
+        padding: 20px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed; /*Fixer l'en-tête*/
+        backdrop-filter: blur(10px);
+        background-color: linear-gradient(to bottom, black 70%, transparent 100%); /* Dégradé de masque */
+        top: 0; /*Positionner en haut*/
+        left: 0;
+        z-index: 1000; /*Placer au-dessus des autres éléments*/
+        overflow: visible; /*Assurer que le contenu déborde*/
+    }
+
+    .full-width-header img {
+        max-width: 100px;
+    }
+
+    .full-width-header h1 {
+        display: inline-block; /*Permet d'utiliser flex sur le conteneur parent*/
+        flex-grow: 1;
+        text-align: center;
+        font-size: 64px; /*Taille de la police*/
+        background: linear-gradient(to right, rgb(119, 19, 119) 30%, red 100%);
+        background-clip: text; /*Clipper le texte*/
+        -webkit-background-clip: text; /*Clipper le texte*/
+        -webkit-text-fill-color: transparent; /*Remplir le texte avec le dégradé*/
+    }
+
+    .header {
+        backdrop-filter: blur(10px);
+        background: linear-gradient(to right, rgb(119, 19, 119) 50%, red 100%);
+        padding: 15px; /*Hauteur du rectangle*/
+        width: 30%; /*Prend 30% de la largeur*/
+        color: #ffffff; /*Couleur du texte*/
+        margin: 0 auto; /*Centre horizontalement*/
+        text-align: center;
+        border-radius: 8px; /*Coins légèrement arrondis (optionnel)*/
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /*Effet d'ombre (optionnel)*/
+        position: relative; /* Nécessaire pour le positionnement absolu des éléments enfants */
+        top: 10px; /* Positionne le rectangle en bas de la page */
+    }
+
+    .footer-content {
+        color: #ffffff;
+        width: 100%;
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        bottom: 0;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(10px);
+        mask-image: linear-gradient(to top, black 60%, transparent 100%);
+    }
+
+    .footer-content a {
+        color: #ffffff;
+        text-decoration: none;/*Supprime le soulignement des liens*/
+        margin-right: 15px;/*Ajoute un espacement entre les liens*/
+    }
+
+    .footer-content a:hover {
+        text-decoration: underline;
+    }
+
+    .menu-container{
+        display: flex;
+        justify-content: center; /*Distribue espace entre les objets*/
+        align-items: center; /*Aligne les objets en bas*/
+        gap: 20px; /*Optionnal : espacement supplémentaire entre les éléments*/
+        position: absolute;
+        top: 40%; /*Positionne le conteneur au milieu de la page*/
+        left: 50%; /*Positionne le conteneur au milieu de la page*/
+        transform: translate(-50%, -50%); /*Centre le conteneur*/
+        width: 2000px; /*Largeur totale*/
+        height: auto;
+    }
+
+    .selection_1, .selection_2, .selection_3 {
+        backdrop-filter: blur(10px);
+        background: linear-gradient(to right, rgb(119, 19, 119) 50%, red 100%);
+        width: 25%;
+        color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        position: relative;
+        overflow: hidden;
+        padding: 85px;
+        display: flex;
+        flex-direction: column; /* Positionne le texte et l'image en colonne */
+        align-items: center; /* Centre le texte et l'image horizontalement */
+        justify-content: flex-end;
+        text-align: center; /* Centre le texte */
+        text-decoration: none; /* Supprime le soulignement du lien */
+        color: inherit; /* Garde la couleur du texte du lien */
+        margin: 10px; /* Ajoute un espace autour de chaque sélection */
+        height: 250px; /*Fixe la hauteur pour un alignement précis*/
+        margin-top: 175px;
+    }
+
+    .selection_1 img, .selection_2 img, .selection_3 img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        flex-grow: 1;
+    }
+
+    .selection_1:hover, .selection_2:hover, .selection_3:hover {
+        transform: scale(0.9); /*Réduit la taille à 90%*/
+        transition: transform 0.3s ease-in-out; /*Animation fluide sur 0.3s*/
+
+    }
+
+    .selection_1:hover .text-bottom, .selection_2:hover .text-bottom, .selection_3:hover .text-bottom {
+        text-decoration: underline; /*Ajoute un soulignement*/
+        transition: text-decoration 0.3s ease-in-out; /*Transition fluide pour le soulignement*/
+    }
+
+    .text-bottom {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        padding: 10px;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: #ffffff;
+        text-align: center;
+
+    }
+
+    .dropdown-menu {
+        position: absolute;
+        top: 0;
+        right: 0;
+        backdrop-filter: blur(10px);
+        background: linear-gradient(to right, rgb(119, 19, 119) 50%, red 100%);
+        color: #ffffff;
+        border-radius: 0; /*Coins carré*/
+        box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2); /*Ombre pour l'effet*/
+        padding: 40px; /*Espacement interne*/
+        width: 250px;
+        border: none;
+        z-index: 9999;
+        transform: translateX(100%); /*Hors de l'écran*/
+        transition: transform 0.5s ease-in-out; /*Animation fluide*/
+        display: none; /*Menu masqué*/
+    } 
+
+    .dropdown-menu.show {
+        transform: translateX(0); /*Ramène à sa position initiale*/
+        display: block; /*Affiche le menu*/
+    }
+
+    .dropdown-menu .dropdown-item {
+        padding: 15px;
+        color: #ffffff;
+        text-align: left;
+        width: 100%;
+    }
+
+    .dropdown-menu .dropdown-item:hover {
+        background-color: #f8f9fa; /*Changement de couleur au survol*/
+        backdrop-filter: blur(10px);
+        background: linear-gradient(to right, rgb(119, 19, 119) 50%, red 100%);
+    }
+
+    .full-width-form {
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        width: 45%;
+        position: relative;
+        top: 300px;
+        margin: 0; /* Supprime les marges externes */
+        left: 27%;
+    }
+
+
+    .btn-primary {
+        padding: 9px 18px;
+        background: linear-gradient(to right, rgb(119, 19, 119) 50%, red 100%);
+        border-color: white;
+        border-radius: 10px;
+    }
+    .btn-primary:hover {
+        background: linear-gradient(to right, rgb(119, 19, 119) 50%, red 100%);
+
+    }
+
+    .conteneur {
+        display: flex; /* Utilise flexbox pour aligner les deux parties */
+        width: 100%; /* Largeur totale du rectangle */
+        height: 500px; /* Hauteur du rectangle, ajustez selon vos besoins */
+        margin-top: 75px;
+        top: calc(100vh - 90vh);
+        position: relative;
+    }
+
+    .coordonnées {
+        background-color: rgb(37, 37, 37); /* Fond noir */
+        flex: 4; /* Occupe 50% de la largeur */
+        color: #ffffff;
+    }
+
+    .coordonnées h3 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 40px;
+    }
+
+    .loc-container, .tel-container, .mail-container { 
+        display: flex;
+        align-items: center; /* Centre les objets du conteneur */
+        margin-top: 80px; /* Espace au-dessus de chaque conteneur */
+        margin-left: 90px;
+    }
+
+    .loc-container .loc-icon, .tel-container .tel-icon, .mail-container .mail-icon {
+        margin-right: 20px; /* Espace entre l'icône et le lien */
+    }
+
+    .loc-link, .tel-link, .mail-link {
+        color: #ffffff; /* Couleur blanche pour le texte */
+        text-decoration: none; /* Supprime le soulignement du lien */
+    }
+
+    .loc-link:hover, .tel-link:hover, .mail-link:hover {
+        text-decoration: underline; /* Ajout de soulignement au survol */
+    }
+
+    .loc-container i, .tel-container i, .mail-container i {
+        color: #ffffff;
+        font-size: 30px;
+        margin-right: 20px;
+    }
+
+    .loc-container i:hover, .tel-container i:hover, .mail-container i:hover {
+        color: blue;
+    }
+
+    .form {
+        background-color: #ffffff;
+        flex: 6;
+        display: flex;
+        flex-direction: column;
+        align-items: center; /*Centre les champs horizontalement*/
+        justify-content: center;
+        padding: 20px;
+    }
+
+    .form-container {
+        margin: auto;
+        width: 100%;
+        max-width: 800px;
+    }
+
+    .form-row {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .form-field {
+        width: 100%;
+        padding: 10px;
+        margin: 5px; /*Espacement entre les champs si nécessaire*/
+        box-sizing: border-box; /*Inclut notre padding dans la largeur totale */
+        margin-top: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .half-width {
+        width: 48%; /*Deux champs sur la même ligne prennent chacun environ la moitié de la largeur*/
+        box-sizing: border-box; /*Inclut le padding dans la largeur totale*/
+    }
+
+    .full-width {
+        width: 100%;
+    }
+
+    textarea.form-field {
+        height: 100px;
+    }
+
+    .mention-legale-content {
+        flex-grow: 1; /* Permet au contenu d'occuper l'espace restant */
+        width: 100%;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-top: 150px;
+        height: calc(100vh - 30vh);
+        position: relative;
+
+    }
+
+    .mention-legale-content p {
+        background: linear-gradient(to right, rgb(119, 19, 119) 50%, red 100%);
+        color: #ffffff;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+        bottom: 0;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+    }
+
+    .politique {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow-y: auto;
+    }
+
+    .politique-content {
+        background: linear-gradient(to right, rgb(119, 19, 119) 50%, red 100%);
+        width: 55%;
+        min-height: 100vh;
+        color: #ffffff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+        text-decoration: none; /* Supprime le soulignement du lien */
+        position: relative;
+        margin-bottom: 100px;
+        margin-top: 150px;
+        border-radius: 10px;
+    }
+
+    .politique-content h1 {
+        font-weight: bold;
+        font-size: 22px;
+        margin: 10px;
+    }
+
+    .politique-content p {
+        font-size: 18px;
+        max-width: 600px; /* Pour limiter la largeur du paragraphe */
+        margin: 0 auto 40px; /* Centrage automatique */
+        line-height: 1.6; /* Meilleure lisibilité */
+        text-align: left;
+    }
+
+    .politique-content ul {
+        margin: 0 auto;
+        text-align: left; /* Garder le texte aligné à gauche */
+        max-width: 600px; /* Centrer le texte en définissant une largeur max */
+    }
+
+    @media screen and (max-width: 1400px) {
+        .full-width-form {
+            position: relative;
+            top: 100px; 
+        }
+    }
+    
+    @media screen and (max-width: 1024px) {
+        .menu-container {
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            gap: 20px;
+            margin-top: 250px;
+        }
+        .selection_1, .selection_2, .selection_3 {
+            width: 70%;
+            margin: 0 auto 20px auto;
+        }
+
+    }
+
+    /* Responsive pour tablette (moins de 768px de largeur) */
+    @media screen and (max-width: 768px) {
+        .politique-content{
+            width: 90%;
+            padding: 15px;
+            margin-top: 100px;
+        }
+
+        .politique-content h1 {
+            font-size: 18px;
+        }
+
+        .politique-content p {
+            font-size: 16px;
+        }
+
+        .menu-container {
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            gap: 20px;
+            margin-top: 350px;
+        }
+        .selection_1, .selection_2, .selection_3 {
+            width: 70%;
+            margin: 0 auto 90px auto;
+            
+        }
+
+        /* Ordre des éléments : selection_1, selection_2, selection_3 */
+        .selection_1 { order: 1; }
+        .selection_2 { order: 2; }
+        .selection_3 { order: 3; }
+
+        .full-width-header h1 {
+            font-size: 40px;
+        }
+    }
+
+    /* Responsive pour téléphone (moins de 480px de largeur) */
+    @media screen and (max-width: 480px) {
+        .politique-content {
+            width: 100%;
+            padding: 10px;
+            margin-top: 50px;
+        }
+
+        .politique-content h1 {
+            font-size: 16px;
+        }
+
+        .politique-content p {
+            font-size: 14px;
+        }
+
+        .selection_1, .selection_2, .selection_3 {
+            width: 70%;
+            margin-top: 10px;
+        }
+
+        .full-width-header h1 {
+            font-size: 36px;
+        }
+    }
+</style>
