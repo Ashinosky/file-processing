@@ -1,0 +1,94 @@
+<!doctype html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scable=no">
+        <title>Référencement de documents</title>
+        <!-- Bootstrap CSS -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="../static/css/style.css">
+    </head>
+<body>
+    <div class="background"></div>
+    <div class="full-width-header">
+        <a class="home" href="accueil.html" id="homeMenuButton" aria-haspopup="true" aria-expanded="false">
+            <img src="../static/images/logo-SNCF.png" alt="SNCF Logo">
+        </a>
+        <h1>Text File to Excel</h1>
+        
+        <div class="dropdown">
+            <!-- Menu déroulant activé uniquement au clic -->
+            <a href="#" aria-haspopup="true" aria-expanded="false">
+                <img src="../static/images/icône-menu.svg" id="dropdownMenuButton" alt="Menu Icon" style="max-width: 50px;">
+            </a>
+            <!-- Contenu du menu déroulant -->
+            <div class="dropdown-menu dropdown-menu-right dropdown-menu-custom" aria-labelledby="dropdownMenuButton">
+                <button type="button" class="close" aria-label="Close" id="closeMenuButton" style="background: transparent; border: none; color: white; font-size: 1.5rem; position: absolute; top: 10px; right: 10px;">
+                    &times;
+                </button>
+                
+                <a class="dropdown-item" href="accueil.html">Accueil</a>
+                <a class="dropdown-item" href="tfexcel.html">Text file to Excel </a>
+                <a class="dropdown-item" href="tfword.html">Text file to Word </a>
+                <a class="dropdown-item" href="etword.html">Excel to Word</a>
+            </div>
+        </div>
+    </div>
+    <div class="full-width-form">
+        <form method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="excel_file">Excel File:</label>
+                <input type="file" name="excel_file" id="excel_file" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="text_file">Text File:</label>
+                <input type="file" name="text_file" id="text_file" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="column_name">Column Name:</label>
+                <input type="text" name="column_name" id="column_name" class="form-control" required>
+            </div>
+            <div class="text-center">
+                <input type="submit" value="Upload" class="btn btn-primary">
+            </div>
+        </form>
+    </div>
+
+
+    <!-- jQuery (version complète) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- Popper.js version 1.x -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <!-- Bootstrap 4.5.2 JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- JavaScript pour ouvrir et fermer le menu -->
+    <script>
+        // Ouvrir le menu déroulant
+        document.getElementById('dropdownMenuButton').addEventListener('click', function() {
+            var menu = document.querySelector('.dropdown-menu-custom');
+            /*menu.style.display = menu.style.display === 'none' || menu.style.display === '' ? 'block' : 'none';*/
+            menu.classList.toggle('show'); //Basculer entre "afficher" et "cacher" le menu
+        });
+
+        // Fermer le menu déroulant avec l'icône de la croix
+        document.getElementById('closeMenuButton').addEventListener('click', function() {
+            document.querySelector('.dropdown-menu-custom').classList.remove('show'); // Cache le menu /*.display = 'none';*/
+        });
+
+    </script>
+
+</body>
+<footer>
+    <div class="footer-content">
+        <p>&copy; 2025 SNCF. Tous droits réservés.</p>
+        <p>
+            <a href="mention-legales.html">Mentions légales</a>
+            <a href="politique-de-confidentialite.html">Politique de confidentialité</a>
+            <a href="contact.html">Contactez-nous</a>
+        </p>
+    </div>
+</footer>
+</html>
